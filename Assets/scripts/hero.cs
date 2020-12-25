@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class hero : MonoBehaviour
@@ -8,12 +6,22 @@ public class hero : MonoBehaviour
     public float vel = 3;
     public Rigidbody2D rb;
     Vector2 input;
+    bool facingRight;
 
     void Update()
     {
         input.x = Input.GetAxisRaw("Horizontal");
 
         input.y = Input.GetAxisRaw("Vertical");
+
+        if (input.x > 0 && facingRight)
+        {
+            Flip();
+        }
+        else if (input.x < 0 && !facingRight)
+        {
+            Flip();
+        }
     }
 
     private void FixedUpdate()
@@ -32,5 +40,14 @@ public class hero : MonoBehaviour
     private void LoadNextScene()
     {
         SceneManager.LoadScene(1);
+    }
+
+    private void Flip()
+    {
+        facingRight = !facingRight;
+
+        Vector2 Scale = transform.localScale;
+        Scale.x *= -1;
+        transform.localScale = Scale;
     }
 }
