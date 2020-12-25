@@ -8,7 +8,6 @@ public class hero : MonoBehaviour
     public float vel = 3;
     public Rigidbody2D rb;
     Vector2 input;
-    GameObject Player;
 
     void Update()
     {
