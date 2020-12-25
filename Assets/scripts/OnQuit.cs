@@ -11,8 +11,5 @@ public class OnQuit : MonoBehaviour
         SaveSystem.SavePlayer(player);
     }
 
-    public void OnApplicationQuit()
-    {
-        SaveSystem.LoadPlayer();
-    }
+    
 }

@@ -11,6 +11,11 @@ public class hero : MonoBehaviour
     GameObject Player;
 
 
+    public void Start()
+    {
+        SaveSystem.LoadPlayer();
+    }
+
     void Update()
     {
         input.x = Input.GetAxisRaw("Horizontal");
