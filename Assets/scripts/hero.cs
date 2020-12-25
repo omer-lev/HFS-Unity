@@ -10,12 +10,6 @@ public class hero : MonoBehaviour
     Vector2 input;
     GameObject Player;
 
-
-    public void Start()
-    {
-        SaveSystem.LoadPlayer();
-    }
-
     void Update()
     {
         input.x = Input.GetAxisRaw("Horizontal");
@@ -39,22 +33,5 @@ public class hero : MonoBehaviour
     private void LoadNextScene()
     {
         SceneManager.LoadScene(1);
-    }
-
-    public void SavePlayer()
-    {
-        SaveSystem.SavePlayer(Player);
-    }
-
-    public void LoadPlayer()
-    {
-        PlayerData data = SaveSystem.LoadPlayer();
-
-        Vector3 pos;
-        pos.x = data.pos[0];
-        pos.y = data.pos[1];
-        pos.z = data.pos[2];
-
-        transform.position = pos;
     }
 }
