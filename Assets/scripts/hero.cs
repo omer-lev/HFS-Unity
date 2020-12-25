@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using F = System.IO.File;
 
 public class hero : MonoBehaviour
 {
@@ -9,12 +10,21 @@ public class hero : MonoBehaviour
 
     Vector2 input;
 
-    // Update is called once per frame
+    string path = Application.dataPath;
+    string saveContent;
+
+    void Start()
+    {
+        F.Create(path, "game.save");
+    }
+
     void Update()
     {
         input.x = Input.GetAxisRaw("Horizontal");
 
         input.y = Input.GetAxisRaw("Vertical");
+
+        saveContent = rb.Posision.ToString();
     }
 
     private void FixedUpdate()
@@ -33,5 +43,10 @@ public class hero : MonoBehaviour
     private void LoadNextScene()
     {
         SceneManager.LoadScene(1);
+    }
+
+    private void DataSave()
+    {
+        F.WriteAllText(path, saveContent);
     }
 }
