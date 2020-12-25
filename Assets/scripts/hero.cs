@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class hero : MonoBehaviour
 {
@@ -19,5 +20,15 @@ public class hero : MonoBehaviour
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + input * vel * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Invoke("LoadNextScene", 0.2f);
+    }
+
+    private void LoadNextScene()
+    {
+        SceneManager.LoadScene(1);
     }
 }
