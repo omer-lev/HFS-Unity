@@ -10,12 +10,14 @@ public class hero : MonoBehaviour
 
     Vector2 input;
     string path;
+    string read;
     
     string saveContent;
 
     void Start()
     {
-        path = Application.dataPath + "game.save";
+        path = Application.dataPath + "/game.save";
+        rb.position = read;
     }
 
     void Update()
@@ -25,7 +27,6 @@ public class hero : MonoBehaviour
         input.y = Input.GetAxisRaw("Vertical");
 
         saveContent = rb.position.ToString();
-
         DataSave();
     }
 
@@ -49,15 +50,11 @@ public class hero : MonoBehaviour
 
     private void DataSave()
     {
-        try
-        {
-            F.WriteAllText(path, saveContent);
-        }
-        catch (System.Exception)
-        {
-            print("Error while saving!");
-            throw;
-        }
-        
+        F.WriteAllText(path, saveContent);
     }
+
+    private void DataRead()
+    {
+        F.AppendAllText(path, read);
+    } 
 }
