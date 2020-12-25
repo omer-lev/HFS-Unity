@@ -12,10 +12,13 @@ public class hero : MonoBehaviour
 
     string path = Application.dataPath;
     string saveContent;
+    string readContent;
 
     void Start()
     {
         F.Create(path, "game.save");
+        DataRead();
+        rb.position = readContent;
     }
 
     void Update()
@@ -24,7 +27,7 @@ public class hero : MonoBehaviour
 
         input.y = Input.GetAxisRaw("Vertical");
 
-        saveContent = rb.Posision.ToString();
+        saveContent = rb.posision.ToString();
     }
 
     private void FixedUpdate()
@@ -45,5 +48,10 @@ public class hero : MonoBehaviour
     private void DataSave()
     {
         F.WriteAllText(path, saveContent);
+    }
+
+    private void DataRead()
+    {
+        F.AppendAllText(path, readContent);
     }
 }
