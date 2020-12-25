@@ -9,13 +9,13 @@ public class hero : MonoBehaviour
     public Rigidbody2D rb;
 
     Vector2 input;
-
-    string path = Application.dataPath;
+    string path;
+    
     string saveContent;
 
     void Start()
     {
-        F.Create(path, "game.save");
+        path = Application.dataPath + "game.save";
     }
 
     void Update()
@@ -24,7 +24,9 @@ public class hero : MonoBehaviour
 
         input.y = Input.GetAxisRaw("Vertical");
 
-        saveContent = rb.Posision.ToString();
+        saveContent = rb.position.ToString();
+
+        DataSave();
     }
 
     private void FixedUpdate()
@@ -47,6 +49,15 @@ public class hero : MonoBehaviour
 
     private void DataSave()
     {
-        F.WriteAllText(path, saveContent);
+        try
+        {
+            F.WriteAllText(path, saveContent);
+        }
+        catch (System.Exception)
+        {
+            print("Error while saving!");
+            throw;
+        }
+        
     }
 }
