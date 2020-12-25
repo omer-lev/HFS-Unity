@@ -1,33 +1,21 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using F = System.IO.File;
 
 public class hero : MonoBehaviour
 {
     public float vel = 3;
-
     public Rigidbody2D rb;
-
     Vector2 input;
-    string path;
-    string read;
-    
-    string saveContent;
+    GameObject Player;
 
-    void Start()
-    {
-        path = Application.dataPath + "/game.save";
-        rb.position = read;
-    }
 
     void Update()
     {
         input.x = Input.GetAxisRaw("Horizontal");
 
         input.y = Input.GetAxisRaw("Vertical");
-
-        saveContent = rb.position.ToString();
-        DataSave();
     }
 
     private void FixedUpdate()
@@ -48,13 +36,20 @@ public class hero : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    private void DataSave()
+    public void SavePlayer()
     {
-        F.WriteAllText(path, saveContent);
+        SaveSystem.SavePlayer(Player);
     }
 
-    private void DataRead()
+    public void LoadPlayer()
     {
-        F.AppendAllText(path, read);
-    } 
+        PlayerData data = SaveSystem.LoadPlayer();
+
+        Vector3 pos;
+        pos.x = data.pos[0];
+        pos.y = data.pos[1];
+        pos.z = data.pos[2];
+
+        transform.position = pos;
+    }
 }
