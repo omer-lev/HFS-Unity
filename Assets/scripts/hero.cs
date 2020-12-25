@@ -24,7 +24,10 @@ public class hero : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Invoke("LoadNextScene", 0.2f);
+        if (collision.gameObject.tag == "hativaCollider")
+        {
+            Invoke("LoadNextScene", 0.2f);
+        }
     }
 
     private void LoadNextScene()
