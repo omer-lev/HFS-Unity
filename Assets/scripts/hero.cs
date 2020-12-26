@@ -31,15 +31,26 @@ public class hero : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "hativaCollider")
+        switch (collision.gameObject.tag)
         {
-            Invoke("LoadNextScene", 0.2f);
+            case "hativaCollider":
+                Invoke("LoadNextScene", 0.2f);
+                break;
+
+            default:
+                Invoke("LoadFirstScene", 0.2f);
+                break;
         }
     }
 
     private void LoadNextScene()
     {
         SceneManager.LoadScene(1);
+    }
+
+    private void LoadFirstScene()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void Flip()
