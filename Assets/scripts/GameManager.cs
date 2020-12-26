@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
 
 public class GameManager : MonoBehaviour
@@ -24,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown("r"))
+        if(Input.GetKeyDown(KeyCode.Delete))
         {
             ClearSave();
         }
@@ -37,7 +35,6 @@ public class GameManager : MonoBehaviour
             Save();
         }
     }
-
 
     private void Save()
     {
@@ -56,13 +53,11 @@ public class GameManager : MonoBehaviour
             posX = float.Parse(posString[1]);
             posY = float.Parse(posString[2]);
 
-
             Player.transform.position = new Vector3(posX, posY, 0);
         }
-        catch (System.Exception)
+        catch (System.Exception exep)
         {
-            print("No data in game.save");
+            print("No data in game.save: " + exep.Message);
         }
-        
     }
 }
