@@ -7,23 +7,37 @@ public class GameManager : MonoBehaviour
 {
     string path;
     public GameObject Player;
+    bool clearSave = false;
 
     void Start()
     {
         path = Application.dataPath + "/game.save";
+
         Load();
     }
 
-    // Update is called once per frame
+    private void ClearSave()
+    {
+        File.WriteAllText(path, "");
+        clearSave = true;
+    }
+
     void Update()
     {
-        
+        if(Input.GetKeyDown("r"))
+        {
+            ClearSave();
+        }
     }
 
     private void OnApplicationQuit()
     {
-        Save();
+        if (!clearSave)
+        {
+            Save();
+        }
     }
+
 
     private void Save()
     {
@@ -32,12 +46,23 @@ public class GameManager : MonoBehaviour
 
     private void Load()
     {
-        string saveString = File.ReadAllText(path);
-        string[] posString = saveString.Split(',', '(', ')');
+        try
+        {
+            string saveString = File.ReadAllText(path);
+            string[] posString = saveString.Split(',', '(', ')');
 
-        float posX = float.Parse(posString[1]);
-        float posY = float.Parse(posString[2]);
+            float posX, posY;
 
-        Player.transform.position = new Vector3(posX, posY, 0);
+            posX = float.Parse(posString[1]);
+            posY = float.Parse(posString[2]);
+
+
+            Player.transform.position = new Vector3(posX, posY, 0);
+        }
+        catch (System.Exception)
+        {
+            print("No data in game.save");
+        }
+        
     }
 }
