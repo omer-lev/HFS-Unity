@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class hero : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class hero : MonoBehaviour
     public Rigidbody2D rb;
     Vector2 input;
     bool facingRight;
+    public Animator animator;
 
     void Update()
     {
@@ -22,6 +24,9 @@ public class hero : MonoBehaviour
         {
             Flip();
         }
+
+        animator.SetFloat("WalkX", Math.Abs(input.x));
+        animator.SetFloat("WalkY", input.y);
     }
 
     private void FixedUpdate()
