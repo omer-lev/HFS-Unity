@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Delete))
+        if(Input.GetKeyDown("r"))
         {
             ClearSave();
         }
