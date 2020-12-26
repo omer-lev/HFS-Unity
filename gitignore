@@ -1,0 +1,9 @@
+.gitignore
+Logs
+Temp
+UserSettings
+.vs
+Library
+obj
+Assembly-CSharp.csproj
+Temp/UnityLockfile
