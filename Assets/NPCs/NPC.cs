@@ -3,22 +3,63 @@
 public class NPC : MonoBehaviour
 {
     public Rigidbody2D rb;
-    int timer;
+    public Animator anim;
+    int timer = 0;
+    Vector2 moveDir;
+    int rnd;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        timer = 5;
-    }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
-        if (timer == 5)
+        if (timer == 120)
         {
-            rb.MovePosition(rb.position + new Vector2(Random.Range(-3, 3) * Time.deltaTime, Random.Range(-3, 3) * Time.deltaTime));
+            rnd = Random.Range(1,9);
             timer = 0;
         }
+        switch (rnd)
+        {
+            case 1:
+                moveDir = new Vector2(1,1);
+                anim.SetFloat("walk",1);
+                break;
+
+            case 2:
+                moveDir = new Vector2(0,1);
+                anim.SetFloat("walk", 1);
+                break;
+
+            case 3:
+                moveDir = new Vector2(-1,1);
+                anim.SetFloat("walk", 1);
+                break;
+
+            case 4:
+                moveDir = new Vector2(0,-1);
+                anim.SetFloat("walk", 0);
+                break;
+
+            case 5:
+                moveDir = new Vector2(-1,-1);
+                anim.SetFloat("walk", 0);
+                break;
+
+            case 6:
+                moveDir = new Vector2(-1,0);
+                break;
+
+            case 7:
+                moveDir = new Vector2(1,0);
+                break;
+
+            case 8:
+                moveDir = new Vector2(1,-1);
+                anim.SetFloat("walk", 0);
+                break;
+
+            case 9:
+                moveDir = new Vector2(0,0);
+                break;
+        }
+        rb.MovePosition(rb.position + moveDir * Time.fixedDeltaTime);
         timer++;
     }
 }
