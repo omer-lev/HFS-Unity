@@ -68,33 +68,3 @@ public class GameManager : MonoBehaviour
         }
     }
 }
-
-//public class Save : MonoBehaviour
-//{
-    
-
-
-    /// <param name="go">GameObject of the object you want to save its position</param>
-    // public void Init(GameObject go)
-    // {
-    //     path = Application.dataPath + "/game.save";
-    //     clearSave = false;
-    //     Player = go;
-    // }
-
-    
-
-    // public void Encript()
-    // {
-    //     print("Encripting save file");
-    //     File.Encrypt(path);
-    //     print("Encripting done");
-    // }
-    // 
-    // public void Decript()
-    // {
-    //     print("Decripting save file");
-    //     File.Decrypt(path);
-    //     print("Decripting done, reading file...");
-    // }
-//}
